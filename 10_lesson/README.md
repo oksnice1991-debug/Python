@@ -1,0 +1,5 @@
+# Автотесты с Allure (10_lesson)
+## Установка Python-библиотеки (https://pypi.org/project/allure-pytest/)
+### Установка Allure (brew install allure)
+#### Запустить тесты с сохранением Allure-результатов ( pytest 10_lesson/ --alluredir=allure-results)
+##### Открыть отчет в браузере (allure serve allure-results)
