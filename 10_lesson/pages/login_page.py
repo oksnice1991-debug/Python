@@ -12,15 +12,36 @@ class LoginPage:
 
     @allure.step("Ввод логина: {text}")
     def enter_username(self, text: str) -> None:
-        """Вводит логин в поле username"""
+        """
+        Вводит логин в поле username.
+
+        Args:
+            text (str): Логин пользователя.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.username).send_keys(text)
 
     @allure.step("Ввод пароля")
     def enter_password(self, text: str) -> None:
-        """Вводит пароль в поле password"""
+        """
+        Вводит пароль в поле password.
+
+        Args:
+            text (str): Пароль пользователя.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.password).send_keys(text)
 
     @allure.step("Нажатие кнопки входа")
     def click_login(self) -> None:
-        """Нажимает кнопку входа"""
+        """
+        Нажимает кнопку входа.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.login_button).click()

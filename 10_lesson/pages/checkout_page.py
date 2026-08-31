@@ -16,36 +16,68 @@ class CheckoutPage:
 
     @allure.step("Ввод имени: {text}")
     def enter_firstname(self, text: str) -> None:
-        """Вводит имя в поле first-name"""
+        """
+        Вводит имя в поле first-name.
+
+        Args:
+            text (str): Имя пользователя.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.firstname).send_keys(text)
 
     @allure.step("Ввод фамилии: {text}")
     def enter_lastname(self, text: str) -> None:
-        """Вводит фамилию в поле last-name"""
+        """
+        Вводит фамилию в поле last-name.
+
+        Args:
+            text (str): Фамилия пользователя.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.lastname).send_keys(text)
 
     @allure.step("Ввод почтового индекса: {text}")
     def enter_postalcode(self, text: str) -> None:
-        """Вводит почтовый индекс в поле postal-code"""
+        """
+        Вводит почтовый индекс в поле postal-code.
+
+        Args:
+            text (str): Почтовый индекс.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.postalcode).send_keys(text)
 
     @allure.step("Нажать кнопку Continue")
     def click_continue(self) -> None:
-        """Нажимает кнопку Continue и ждёт появления итоговой суммы"""
+        """
+        Нажимает кнопку Continue и ждёт появления итоговой суммы.
+
+        Returns:
+            None
+        """
         wait = WebDriverWait(self.driver, 10)
-        continue_button = wait.until(
+        continue_btn = wait.until(
             EC.element_to_be_clickable(self.continue_button)
-        )
-        continue_button.click()
-        wait.until(
-            EC.presence_of_element_located(self.total_label)
-        )
+            )
+        continue_btn.click()
+        wait.until(EC.presence_of_element_located(self.total_label))
 
     @allure.step("Получение итоговой суммы")
-    def get_total(self) -> None:
-        """Возвращает текст итоговой суммы"""
+    def get_total(self) -> str:
+        """
+        Возвращает текст итоговой суммы со страницы.
+
+        Returns:
+            str: Текст итоговой суммы (например, "Total: $58.29").
+        """
         wait = WebDriverWait(self.driver, 10)
         total_element = wait.until(
             EC.presence_of_element_located(self.total_label)
-        )
+            )
         return total_element.text

@@ -9,10 +9,24 @@ class MainPage:
 
     @allure.step("Добавление товара в корзину: {item_id}")
     def add_item_to_cart(self, item_id: str) -> None:
-        """Добавляет выбранный товар в корзину"""
+        """
+        Добавляет товар в корзину по его ID.
+
+        Args:
+            item_id (str): Идентификатор товара
+            Например, 'sauce-labs-backpack'.
+
+        Returns:
+            None
+        """
         self.driver.find_element(By.ID, f"add-to-cart-{item_id}").click()
 
     @allure.step("Переход в корзину")
     def go_to_cart(self) -> None:
-        """Открывает страницу корзины и переходит к оформлению"""
+        """
+        Переходит на страницу корзины.
+
+        Returns:
+            None
+        """
         self.driver.find_element(*self.cart_icon).click()

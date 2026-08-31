@@ -27,6 +27,6 @@ def test_calculator():
         calc_page.wait_for_result("15")
     with allure.step("Проверить результат"):
         result = calc_page.get_result_text()
-        assert result == "15", f"Ожидалось 15б получено {result}"
+        assert result == "15", f"Ожидалось 15 получено {result}"
 
     driver.quit()
