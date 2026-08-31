@@ -12,32 +12,36 @@ from pages.checkout_page import CheckoutPage
 @allure.feature("Оформление заказа")
 @allure.severity("blocker")
 def test_shop():
-    driver = webdriver.Chrome()
-    driver.get(
-        "https://www.saucedemo.com/"
-        )
-    login_page = LoginPage(driver)
-    login_page.enter_username("standard_user")
-    login_page.enter_password("secret_sauce")
-    login_page.click_login()
-
-    main_page = MainPage(driver)
-    main_page.add_item_to_cart("sauce-labs-backpack")
-    main_page.add_item_to_cart("sauce-labs-bolt-t-shirt")
-    main_page.add_item_to_cart("sauce-labs-onesie")
-    main_page.go_to_cart()
-
-    cart_page = CartPage(driver)
-    cart_page.click_checkout()
-
-    checkout_page = CheckoutPage(driver)
-    checkout_page.enter_firstname("Oksana")
-    checkout_page.enter_lastname("Kalinina")
-    checkout_page.enter_postalcode('400065')
-    checkout_page.click_continue()
-    result = checkout_page.get_total()
-    assert result == "Total: $58.29", (
-        f"Ожидалось Total: $58.29, получено {result}"
-    )
+    with allure.step("Открыть страницу авторизации"):
+        driver = webdriver.Chrome()
+        driver.get(
+            "https://www.saucedemo.com/"
+            )
+    with allure.step("Ввод логина и пароля"):
+        login_page = LoginPage(driver)
+        login_page.enter_username("standard_user")
+        login_page.enter_password("secret_sauce")
+    with allure.step("Нажать кнопку входа"):
+        login_page.click_login()
+    with allure.step("Добавить 3 товара в корзину"):
+        main_page = MainPage(driver)
+        main_page.add_item_to_cart("sauce-labs-backpack")
+        main_page.add_item_to_cart("sauce-labs-bolt-t-shirt")
+        main_page.add_item_to_cart("sauce-labs-onesie")
+    with allure.step("Переход в корзину"):
+        main_page.go_to_cart()
+        cart_page = CartPage(driver)
+        cart_page.click_checkout()
+    with allure.step("Заполнение формы заказа"):
+        checkout_page = CheckoutPage(driver)
+        checkout_page.enter_firstname("Oksana")
+        checkout_page.enter_lastname("Kalinina")
+        checkout_page.enter_postalcode('400065')
+        checkout_page.click_continue()
+    with allure.step("Проверка итоговой суммы"):
+        result = checkout_page.get_total()
+        assert result == "Total: $58.29", (
+            f"Ожидалось Total: $58.29, получено {result}"
+            )
 
     driver.quit()

@@ -8,5 +8,6 @@ class CartPage:
         self.button_checkout = (By.CSS_SELECTOR, "[data-test='checkout']")
 
     @allure.step("Нажать кнопку Checkout")
-    def click_checkout(self):
+    def click_checkout(self) -> None:
+        """Нажимает кнопку Checkout"""
         self.driver.find_element(*self.button_checkout).click()

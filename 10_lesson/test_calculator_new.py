@@ -9,20 +9,24 @@ from pages.calc_page import CalcPage
 @allure.feature("Калькулятор")
 @allure.severity("blocker")
 def test_calculator():
-    driver = webdriver.Chrome()
-    driver.get(
-        "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html"
+    with allure.step("Открыть страницу калькулятора"):
+        driver = webdriver.Chrome()
+        driver.get(
+            "https://bonigarcia.dev/selenium-"
+            "webdriver-java/slow-calculator.html"
         )
     calc_page = CalcPage(driver)
-
-    calc_page.set_delay(45)
-    calc_page.click_button("7")
-    calc_page.click_button("+")
-    calc_page.click_button("8")
-    calc_page.click_button("=")
-
-    calc_page.wait_for_result("15")
-    result = calc_page.get_result_text()
-    assert result == "15", f"Ожидалось 15б получено {result}"
+    with allure.step("Установить задержку 45 секунд"):
+        calc_page.set_delay(45)
+    with allure.step("Ввести 7+8="):
+        calc_page.click_button("7")
+        calc_page.click_button("+")
+        calc_page.click_button("8")
+        calc_page.click_button("=")
+    with allure.step("Дождаться результата 15"):
+        calc_page.wait_for_result("15")
+    with allure.step("Проверить результат"):
+        result = calc_page.get_result_text()
+        assert result == "15", f"Ожидалось 15б получено {result}"
 
     driver.quit()

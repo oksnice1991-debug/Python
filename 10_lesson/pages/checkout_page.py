@@ -15,19 +15,23 @@ class CheckoutPage:
         self.driver = driver
 
     @allure.step("Ввод имени: {text}")
-    def enter_firstname(self, text):
+    def enter_firstname(self, text: str) -> None:
+        """Вводит имя в поле first-name"""
         self.driver.find_element(*self.firstname).send_keys(text)
 
     @allure.step("Ввод фамилии: {text}")
-    def enter_lastname(self, text):
+    def enter_lastname(self, text: str) -> None:
+        """Вводит фамилию в поле last-name"""
         self.driver.find_element(*self.lastname).send_keys(text)
 
     @allure.step("Ввод почтового индекса: {text}")
-    def enter_postalcode(self, text):
+    def enter_postalcode(self, text: str) -> None:
+        """Вводит почтовый индекс в поле postal-code"""
         self.driver.find_element(*self.postalcode).send_keys(text)
 
     @allure.step("Нажать кнопку Continue")
-    def click_continue(self):
+    def click_continue(self) -> None:
+        """Нажимает кнопку Continue и ждёт появления итоговой суммы"""
         wait = WebDriverWait(self.driver, 10)
         continue_button = wait.until(
             EC.element_to_be_clickable(self.continue_button)
@@ -38,7 +42,8 @@ class CheckoutPage:
         )
 
     @allure.step("Получение итоговой суммы")
-    def get_total(self):
+    def get_total(self) -> None:
+        """Возвращает текст итоговой суммы"""
         wait = WebDriverWait(self.driver, 10)
         total_element = wait.until(
             EC.presence_of_element_located(self.total_label)
