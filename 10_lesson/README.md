@@ -1,0 +1,6 @@
+# Автотесты с Allure (10_lesson)
+## Установка (pip install allure-pytest)
+## Запуск тестов (pytest 10_lesson/ --alluredir=allure-results)
+### Открыть Allure-отчет (allure serve allure-results)
+#### Сгенерировать отчет (allure generate allure-results -o allure-report)
+##### Открыть отчет в браузере (allure open allure-report)
