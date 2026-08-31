@@ -1,0 +1,1 @@
+[{"uid":"d592cdca322d809f","name":"Проверка сценария оформления покупки","time":{"start":1788149737059,"stop":1788149741557,"duration":4498},"status":"passed","severity":"blocker"},{"uid":"119d1153b97cf23","name":"Проверка калькулятора с задержкой","time":{"start":1788150657598,"stop":1788150706658,"duration":49060},"status":"passed","severity":"blocker"}]
